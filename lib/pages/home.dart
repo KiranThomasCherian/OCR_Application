@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:ocr_application/utils/routes.dart';
+import 'package:ocr_application/utils/scan.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -65,8 +66,8 @@ class _HomePageState extends State<HomePage> {
                     color: Colors.grey.shade700,
                     child: InkWell(
                       onTap: () {
-                        Navigator.pushNamed(context, MyRoutes.scanpage);
-                        setState(() {});
+                        // Navigator.pushNamed(context, MyRoutes.scanpage);
+                        // setState(() {});
                       },
                       // hoverColor: Colors.orange,
                       child: Container(

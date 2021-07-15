@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ocr_application/pages/home.dart';
 import 'package:ocr_application/pages/upload.dart';
-import 'package:ocr_application/pages/scan.dart';
 import 'package:ocr_application/utils/routes.dart';
 
 void main() {
@@ -19,7 +18,7 @@ class MyApp extends StatelessWidget {
       // initialRoute: '/',
       routes: {
         MyRoutes.home: (context) => HomePage(),
-        MyRoutes.scanpage: (context) => ScanPage(),
+        // MyRoutes.scanpage: (context) => ScanPage(),
         MyRoutes.uploadpage: (context) => UploadPage(),
       },
     );
