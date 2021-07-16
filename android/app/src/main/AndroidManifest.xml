@@ -2,6 +2,7 @@
     package="com.example.ocr_application">
    <application
         android:label="ocr_application"
+        android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
