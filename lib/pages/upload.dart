@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({Key? key}) : super(key: key);
@@ -14,14 +15,26 @@ class UploadPage extends StatefulWidget {
 class _UploadPageState extends State<UploadPage> {
   PickedFile? _imageFile;
   dynamic? _pickerror;
+  String? extracted = 'Recognised Extracted Text Will Appear Here';
   final picker = ImagePicker();
   _imgFromGallery() async {
     try {
       final image =
           await picker.getImage(source: ImageSource.gallery, imageQuality: 50);
+      if (image != null) {
+        extracted = await FlutterTesseractOcr.extractText(image.path);
+      } else
+        extracted = "Recogonised extracted text will be shown here";
+      print(extracted);
+
       setState(() {
         if (image != null) {
           _imageFile = image;
+
+          // if (_imageFile != null) {
+          //   print(extracted);
+          // } else
+          //   extracted = "Recogonised extracted text will be shown here";
         }
       });
     } catch (e) {
@@ -57,6 +70,14 @@ class _UploadPageState extends State<UploadPage> {
       );
     }
   }
+
+  // gettext() async {
+  //   // setState(() async {
+  //   if (_imageFile != null) {
+  //     extracted = await FlutterTesseractOcr.extractText(_imageFile!.path);
+  //   } else
+  //     extracted = "Recogonised extracted text will be shown here";
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -107,6 +128,25 @@ class _UploadPageState extends State<UploadPage> {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 50,
+                ),
+                Container(
+                  color: Colors.grey.shade600,
+                  child: Padding(
+                    padding: const EdgeInsets.all(25.0),
+                    child: Card(
+                      color: Colors.grey.shade500,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          extracted.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
           ),
