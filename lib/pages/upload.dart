@@ -13,15 +13,15 @@ class UploadPage extends StatefulWidget {
 }
 
 class _UploadPageState extends State<UploadPage> {
-  PickedFile? _imageFile;
+  XFile? _imageFile;
   dynamic? _pickerror;
   String? extracted = 'Recognised Extracted Text Will Appear Here';
   final picker = ImagePicker();
   _imgFromGallery() async {
     try {
-      final image =
-          await picker.getImage(source: ImageSource.gallery, imageQuality: 50);
+      final image = await picker.pickImage(source: ImageSource.gallery);
       if (image != null) {
+        // print(image.path);
         extracted = await FlutterTesseractOcr.extractText(image.path);
       } else
         extracted = "Recogonised extracted text will be shown here";
@@ -40,6 +40,7 @@ class _UploadPageState extends State<UploadPage> {
     } catch (e) {
       setState(() {
         _pickerror = e;
+        print(e);
       });
     }
   }
@@ -60,12 +61,14 @@ class _UploadPageState extends State<UploadPage> {
       }
     } else if (_pickerror != null) {
       return Text(
-        'Pick image error: $_pickerror',
+        'Error: Select An Image (.PNG,.JPG,.JPEG,..) \nand Wait a Few Seconds',
         textAlign: TextAlign.center,
       );
     } else {
       return const Text(
-        'You have not yet picked an image.',
+        'You have not yet picked an image' +
+            '\n' +
+            'Upload an Image And Wait A few Seconds',
         textAlign: TextAlign.center,
       );
     }
@@ -83,6 +86,10 @@ class _UploadPageState extends State<UploadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          title: Text(
+            "Extract text from uploaded image",
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),
+          ),
           backgroundColor: Colors.grey.shade100,
           iconTheme: IconThemeData(
             color: Colors.black,
@@ -91,66 +98,76 @@ class _UploadPageState extends State<UploadPage> {
         child: SafeArea(
             child: Padding(
           padding: const EdgeInsets.all(10),
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: Container(
-                    decoration: BoxDecoration(color: Colors.grey.shade100),
-                    child: Center(child: preview()),
-                    height: 350,
-                    width: 650,
-                  ),
-                ),
-                Card(
-                  color: Colors.grey.shade700,
-                  child: InkWell(
-                    onTap: () {
-                      _imgFromGallery();
-                    },
-                    // hoverColor: Colors.orange,
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
                     child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(color: Colors.white),
-                      ),
-                      height: 40,
-                      width: 400,
-                      child: Center(
-                        child: Text(
-                          "Upload Image",
-                          style: TextStyle(
-                            color: Colors.white,
+                      decoration: BoxDecoration(color: Colors.grey.shade100),
+                      child: Center(child: preview()),
+                      height: 350,
+                      width: 650,
+                    ),
+                  ),
+                  Hero(
+                    tag: Key("upload"),
+                    child: Card(
+                      color: Colors.grey.shade700,
+                      child: InkWell(
+                        onTap: () {
+                          _imgFromGallery();
+                        },
+                        // hoverColor: Colors.orange,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            border: Border.all(color: Colors.white),
+                          ),
+                          height: 40,
+                          width: 400,
+                          child: Center(
+                            child: Text(
+                              "Upload Image",
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
-                SizedBox(
-                  height: 50,
-                ),
-                Container(
-                  color: Colors.grey.shade600,
-                  child: Padding(
-                    padding: const EdgeInsets.all(25.0),
-                    child: Card(
-                      color: Colors.grey.shade500,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          extracted.toString(),
-                          style: TextStyle(color: Colors.white),
+                  SizedBox(
+                    height: 50,
+                  ),
+                  Container(
+                    color: Colors.grey.shade600,
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Card(
+                        color: Colors.grey.shade500,
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: SelectableText(
+                            extracted.toString(),
+                            style: TextStyle(color: Colors.white, fontSize: 14),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         )),
+      ),
+      bottomNavigationBar: Container(
+        width: 500,
+        height: 10,
+        color: Colors.grey.shade800,
       ),
     );
   }
