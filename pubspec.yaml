@@ -30,6 +30,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.2
   flutter_tesseract_ocr: ^0.3.7
+  flutter_mobile_vision: ^0.1.4+1
+  flutter_easyloading: ^3.0.0
 
 dev_dependencies:
   flutter_test:

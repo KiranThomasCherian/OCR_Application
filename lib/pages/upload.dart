@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter_tesseract_ocr/flutter_tesseract_ocr.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class UploadPage extends StatefulWidget {
   const UploadPage({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _UploadPageState extends State<UploadPage> {
   _imgFromGallery() async {
     try {
       final image = await picker.pickImage(source: ImageSource.gallery);
+      EasyLoading.show(status: 'loading...');
       if (image != null) {
         // print(image.path);
         extracted = await FlutterTesseractOcr.extractText(image.path);
@@ -48,11 +50,13 @@ class _UploadPageState extends State<UploadPage> {
   Widget preview() {
     if (_imageFile != null) {
       if (kIsWeb) {
+        EasyLoading.dismiss();
         return Image.network(
           _imageFile!.path,
           fit: BoxFit.cover,
         );
       } else {
+        EasyLoading.dismiss();
         return Semantics(
             child: Image.file(File(
               _imageFile!.path,
@@ -60,11 +64,13 @@ class _UploadPageState extends State<UploadPage> {
             label: 'image_picked_image');
       }
     } else if (_pickerror != null) {
+      EasyLoading.dismiss();
       return Text(
         'Error: Select An Image (.PNG,.JPG,.JPEG,..) \nand Wait a Few Seconds',
         textAlign: TextAlign.center,
       );
     } else {
+      EasyLoading.dismiss();
       return const Text(
         'You have not yet picked an image' +
             '\n' +
@@ -84,90 +90,103 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          title: Text(
-            "Extract text from uploaded image",
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),
-          ),
-          backgroundColor: Colors.grey.shade100,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-          )),
-      body: Material(
-        child: SafeArea(
-            child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    child: Container(
-                      decoration: BoxDecoration(color: Colors.grey.shade100),
-                      child: Center(child: preview()),
-                      height: 350,
-                      width: 650,
+    return MaterialApp(
+      builder: EasyLoading.init(),
+      home: Scaffold(
+        appBar: AppBar(
+            leading: new IconButton(
+              icon: new Icon(Icons.arrow_back),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: Text(
+              "Extract text from imager",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+            backgroundColor: Colors.grey.shade100,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+            )),
+        body: Material(
+          child: SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: Center(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: Container(
+                        decoration: BoxDecoration(color: Colors.grey.shade100),
+                        child: Center(child: preview()),
+                        height: 350,
+                        width: 650,
+                      ),
                     ),
-                  ),
-                  Hero(
-                    tag: Key("upload"),
-                    child: Card(
-                      color: Colors.grey.shade700,
-                      child: InkWell(
-                        onTap: () {
-                          _imgFromGallery();
-                        },
-                        // hoverColor: Colors.orange,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            border: Border.all(color: Colors.white),
-                          ),
-                          height: 40,
-                          width: 400,
-                          child: Center(
-                            child: Text(
-                              "Upload Image",
-                              style: TextStyle(
-                                color: Colors.white,
+                    Hero(
+                      tag: Key("upload"),
+                      child: Card(
+                        color: Colors.grey.shade700,
+                        child: InkWell(
+                          onTap: () {
+                            _imgFromGallery();
+                          },
+                          // hoverColor: Colors.orange,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(color: Colors.white),
+                            ),
+                            height: 40,
+                            width: 400,
+                            child: Center(
+                              child: Text(
+                                "Upload Image",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 50,
-                  ),
-                  Container(
-                    color: Colors.grey.shade600,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Card(
-                        color: Colors.grey.shade500,
-                        child: Padding(
-                          padding: const EdgeInsets.all(20.0),
-                          child: SelectableText(
-                            extracted.toString(),
-                            style: TextStyle(color: Colors.white, fontSize: 14),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    Container(
+                      color: Colors.grey.shade600,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Card(
+                          color: Colors.grey.shade500,
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: SelectableText(
+                              extracted.toString(),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 14),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        )),
-      ),
-      bottomNavigationBar: Container(
-        width: 500,
-        height: 10,
-        color: Colors.grey.shade800,
+          )),
+        ),
+        bottomNavigationBar: Container(
+          width: 500,
+          height: 10,
+          color: Colors.grey.shade800,
+        ),
       ),
     );
   }

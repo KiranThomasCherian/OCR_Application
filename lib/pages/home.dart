@@ -12,6 +12,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scan = ScanPage();
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -62,32 +64,7 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: 50,
                   ),
-                  Card(
-                    color: Colors.grey.shade700,
-                    child: InkWell(
-                      onTap: () {
-                        // Navigator.pushNamed(context, MyRoutes.scanpage);
-                        // setState(() {});
-                      },
-                      // hoverColor: Colors.orange,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.white),
-                        ),
-                        height: 40,
-                        width: 400,
-                        child: Center(
-                          child: Text(
-                            "Scan Using Camera",
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  ScanPage(),
                   // SizedBox(
                   //   height: 50,
                   // ),
