@@ -42,7 +42,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="io.github.edufolly.fluttermobilevision.ocr.OcrCaptureActivity" />
+        <activity android:name="ng.com.piccmaq.flutter.flutter_mobile_vision_2.ocr.OcrCaptureActivity" />
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data

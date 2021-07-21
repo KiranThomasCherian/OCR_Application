@@ -101,7 +101,7 @@ class _UploadPageState extends State<UploadPage> {
               },
             ),
             title: Text(
-              "Extract text from imager",
+              "Extract text from image",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w300,
@@ -124,9 +124,12 @@ class _UploadPageState extends State<UploadPage> {
                       child: Container(
                         decoration: BoxDecoration(color: Colors.grey.shade100),
                         child: Center(child: preview()),
-                        height: 350,
+                        height: 250,
                         width: 650,
                       ),
+                    ),
+                    SizedBox(
+                      height: 8,
                     ),
                     Hero(
                       tag: Key("upload"),
@@ -171,6 +174,7 @@ class _UploadPageState extends State<UploadPage> {
                               extracted.toString(),
                               style:
                                   TextStyle(color: Colors.white, fontSize: 14),
+                              textAlign: TextAlign.center,
                             ),
                           ),
                         ),

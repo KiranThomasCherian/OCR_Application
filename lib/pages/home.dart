@@ -12,8 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final scan = ScanPage();
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -48,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                         fontStyle: FontStyle.italic),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(60.0),
@@ -58,11 +56,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 8,
                   ),
                   Text("Language : English"),
                   SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   ScanPage(),
                   // SizedBox(
