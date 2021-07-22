@@ -80,17 +80,10 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  // gettext() async {
-  //   // setState(() async {
-  //   if (_imageFile != null) {
-  //     extracted = await FlutterTesseractOcr.extractText(_imageFile!.path);
-  //   } else
-  //     extracted = "Recogonised extracted text will be shown here";
-  // }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       home: Scaffold(
         appBar: AppBar(

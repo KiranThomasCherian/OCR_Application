@@ -4,9 +4,6 @@ import 'package:flutter_mobile_vision_2/flutter_mobile_vision_2.dart';
 import 'package:ocr_application/utils/routes.dart';
 
 class ScanPage extends StatefulWidget {
-  // final Function getValue;
-  // ScanPage(this.getValue);
-
   @override
   _ScanPageState createState() => _ScanPageState();
 }
@@ -20,10 +17,10 @@ class _ScanPageState extends State<ScanPage> {
 
   static int OCR_CAM = FlutterMobileVision.CAMERA_BACK;
   static String word = "TEXT";
-  //
+
   Future<Null> _read() async {
     List<OcrText> texts = [];
-    // List<String> values = [];
+
     try {
       texts = await FlutterMobileVision.read(
         multiple: true,
@@ -31,17 +28,6 @@ class _ScanPageState extends State<ScanPage> {
         waitTap: false,
         preview: FlutterMobileVision.PREVIEW,
       );
-      // print(texts);
-      // print('bottom ${texts[3].bottom}');
-      // print('top ${texts[2].top}');
-      // print('left ${texts[4].left}');
-      // print('top ${texts[3].right}');
-      // print('top ${texts[1].language}');
-
-      // texts.forEach((val) => {
-      //       values.add(val.value.toString()),
-      //     });
-      // widget.getValue(values);
     } on Exception {
       texts.add(new OcrText('Failed to recognize text.'));
     }

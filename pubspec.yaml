@@ -32,10 +32,20 @@ dependencies:
   flutter_tesseract_ocr: ^0.3.7
   flutter_mobile_vision_2: ^0.1.9
   flutter_easyloading: ^3.0.0
+  
+
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/ocr_image.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

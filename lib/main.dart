@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
       // initialRoute: '/',
       routes: {
         MyRoutes.home: (context) => HomePage(),
-        // MyRoutes.scanpage: (context) => ScanPage(),
         MyRoutes.uploadpage: (context) => UploadPage(),
       },
     );
