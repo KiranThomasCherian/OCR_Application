@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "OCR App",
+
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
       color: Colors.white,

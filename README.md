@@ -1,16 +1,10 @@
-# ocr_application
+# ocr_application - Using Flutter 
 
-A new Flutter project.
+## Recognize text from images or scan directly using camera
 
-## Getting Started
+This is a application used to implement optical character recignition ,made using flutter.
 
-This project is a starting point for a Flutter application.
+The user can scan texts from images in gallery or can scan in real time by using the phone back camera
 
-A few resources to get you started if this is your first Flutter project:
+Tested on Android.(Web support not available yet)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

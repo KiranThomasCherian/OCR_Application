@@ -83,6 +83,8 @@ class _UploadPageState extends State<UploadPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "OCR App",
+      color: Colors.grey.shade500,
       debugShowCheckedModeBanner: false,
       builder: EasyLoading.init(),
       home: Scaffold(
