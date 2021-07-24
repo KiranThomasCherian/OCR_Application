@@ -8,3 +8,9 @@ The user can scan texts from images in gallery or can scan in real time by using
 
 Tested on Android.(Web support not available yet)
 
+
+------------------------------------------------------------------------------------
+
+![Alt text](/Screenshots/screenshots_merged.png?raw=true "Screenshots")
+
+-------------------------------------------------------------------------------------
