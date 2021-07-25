@@ -12,8 +12,10 @@ Tested on Android.(Web support not available yet)
 Android apk location:build\app\outputs\flutter-apk\app-release.apk
 
 Main Dependencies:
-flutter_tesseract_ocr 
-flutter_mobile_vision_2
+
+[flutter_tesseract_ocr ](https://pub.dev/packages/flutter_tesseract_ocr)
+
+[flutter_mobile_vision_2](https://pub.dev/packages/flutter_mobile_vision_2)
 
 
 
