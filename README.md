@@ -9,7 +9,7 @@ The user can scan texts from images in gallery or can scan in real time by using
 Tested on Android.(Web support not available yet)
 
 
-Android apk location:build\app\outputs\flutter-apk\app-release.apk
+Android apk location:build\app\outputs\flutter-apk\app-release.apk(../build/app/outputs/flutter-apk/app-release.apk)
 
 Main Dependencies:
 
